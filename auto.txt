@@ -1,0 +1,77 @@
+aux <- generar_patente ()
+	aux <- Aleatorio(000,999);	
+Fin Funcion
+
+Funcion pos <- genera_posicion (patente)
+	pos <- patente mod 20;
+	
+FinFuncion
+
+Funcion aux <- ejercicio_a (N)
+	Dimension estacionamiento(20);
+	Definir estacionamiento como entero;
+	Definir pat Como entero;
+	Definir pos como Entero
+	Definir cont Como Entero
+	Definir colision Como Logico
+	colision <- Falso
+	cont <- 0;
+	
+	escribir "Esta x comenzar el while";
+	
+	Mientras (cont<N) y (colision = Falso) hacer
+		pat <- generar_patente();
+		pos <- genera_posicion (pat) + 1;
+		Si estacionamiento(pos) <> 0 entonces
+			colision <- Verdadero
+			Escribir "se produjo colision";
+		SiNo
+			estacionamiento(pos) <- pat;
+			Escribir "estaciono ok";
+			cont <- cont+1; //para contar cuantos autos voy simulando para controlar 
+			//que no me pase de los N que se pasó por parámetro.
+		Fin Si
+		
+	FinMientras
+	
+	si colision = Verdadero Entonces
+		aux<-cont;  
+	SiNo
+		aux<--1;
+	FinSi
+FinFuncion
+
+funcion aux<-ejercicio_b (N,M)
+	definir total_colisiones como entero;
+	definir cont como entero;
+	definir resultado como entero; 
+	
+	total_colisiones<-0;
+	cont<-1; 
+	mientras cont <= M hacer
+		escribir "Simulacion nro:",cont; // cont cantidad de autos que voy simulando para estacionar 
+		resultado<-ejercicio_a(N); 
+		si resultado <> -1 Entonces
+			escribir "Colision";
+			total_colisiones<-total_colisiones+1; 
+		FinSi
+		cont<-cont+1; // voy simulando la cantidad de autos y 
+		//para controlar que no me pase de  m  pruebas.
+	FinMientras
+	escribir "Total colisiones:",total_colisiones;
+	aux<-total_colisiones/M;
+FinFuncion
+
+
+Proceso principal
+	definir resultado como entero;
+	definir probabilidad como real;
+	definir cant_autos como entero;
+	definir cant_pruebas como entero;
+	
+	resultado<-ejercicio_a(20); // cantidad de autos que se pueden estacionar de 1 hasta 20.
+	cant_autos<-5;
+	cant_pruebas<-100;
+	probabilidad<-ejercicio_b(cant_autos,cant_pruebas);
+	escribir "Probabilidad=",probabilidad;
+FinProceso
